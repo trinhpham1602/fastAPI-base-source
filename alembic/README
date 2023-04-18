@@ -1,0 +1,7 @@
+alembic revision --autogenerate -m <message>
+- the cmd auto detect the changes in the Base and generate the migration code corresponding
+- We should execute this cmd to avoid unexpected errors
+
+alembic upgrade head
+- the cmd will apply the migration code to DB
+- We must execute this cmd to apply changes

@@ -21,6 +21,7 @@ class User(Base):
     sex = Column(String)
     birthday = Column(Date) 
     is_active = Column(Boolean, default=True)
+    joined_at = Column(Date)
 
     def is_match_password(self, password):
         if bcrypt.checkpw(password, self.hashed_password):
@@ -28,4 +29,4 @@ class User(Base):
         return False
 
     def hash_password(self):
-        self.password = bcrypt.hashpw(self.password, SAFT)
+        self.password = bcrypt.hashpw(self.password, SALF)

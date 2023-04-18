@@ -1,22 +1,18 @@
-from fastapi import Depends
-from database.db_config import get_db
+import datetime
 from sqlalchemy.orm import Session
-from models.user_model import MRegisterUser
+from models.user_model import MUser
 from database.tables import User
-from .abstract_repository import AbstractRepository
+from .base_repository import BaseRepository
 
-class UserRepository(AbstractRepository):
-    def __init__(self) -> None:
-        pass
-    def create_user(self, user: MRegisterUser):
-        user: User = User(name=user.name,
-fullname=user.fullname,
-email=user.email,
-password=user.password,
-role=user.role,
-sex=user.sex,
-birthday=user.birthday,
-is_active=user.is_active)
-        self.db.add(user)
-        self.db.commit()
-        self.db.close()
+
+class UserRepository(BaseRepository):
+    def __init__(self, db_session: Session):
+        super().__init__(db_session)
+
+    def create_user(self, user: MUser):
+        user: User = User(**user.dict())
+        user.hash_password()
+        user.joined_at = datetime.date()
+        self.db_session.add(user)
+        self.db_session.commit()
+        self.db_session.close()

@@ -9,7 +9,7 @@ class ERole(str, Enum):
     user = 'user'
 
 
-class ESex(int, Enum):
-    male = 1
-    female = -1
-    others = 0
+class ESex(str, Enum):
+    male = 'male'
+    female = 'female'
+    others = 'others'
