@@ -10,7 +10,7 @@ def is_valid_email(email: str):
 
 def is_valid_date(date_string, format="%Y-%m-%d"):
     try:
-        datetime.strptime(date_string, format)
+        datetime.strptime(str(date_string), format)
         return True
     except ValueError:
         return False
